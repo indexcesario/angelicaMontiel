@@ -1,60 +1,932 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Angélica Montiel - Asesora Inmobiliaria</title>
-  <style>
-    :root {
-      --primary: #1a365d;
-      --accent: #2b6cb0;
-      --bg: #f7fafc;
-      --text: #2d3748;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
-    
-    header { background-color: var(--primary); color: white; text-align: center; padding: 3rem 1rem; }
-    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    header p { font-size: 1.1rem; opacity: 0.9; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angélica Montiel | Asesora Inmobiliaria de Confianza</title>
 
-    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
-    h2 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.6rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; display: inline-block; }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    .properties-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .card-content { padding: 1.5rem; }
-    .card-title { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    footer { text-align: center; padding: 2rem; margin-top: 3rem; background: #edf2f7; color: #718096; font-size: 0.9rem; }
-  </style>
+    <!-- Estilos CSS Completos -->
+    <style>
+        :root {
+            --primary: #1A365D;       /* Azul Marino Elegante */
+            --primary-hover: #0F2942;
+            --secondary: #C5A059;     /* Dorado Soft */
+            --accent: #2B6CB0;        /* Azul Claro de Acento */
+            --text-dark: #2D3748;
+            --text-muted: #718096;
+            --bg-light: #F7FAFC;
+            --bg-white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .bg-light {
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* ENCABEZADO Y NAVEGACIÓN */
+        .header {
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .btn-whatsapp-nav {
+            background-color: #25D366;
+            color: white;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-whatsapp-nav:hover {
+            background-color: #1EBE5D;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* HERO SECTION Y BUSCADOR */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.75), rgba(26, 54, 93, 0.75)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 120px 0 100px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #E2E8F0;
+        }
+
+        .search-box {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            align-items: end;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .search-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .search-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .search-group label i {
+            color: var(--accent);
+            margin-right: 4px;
+        }
+
+        .search-group select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .btn-search {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 11px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-search:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* CATÁLOGO DE PROPIEDADES */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-image {
+            position: relative;
+            height: 220px;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag-sale { background-color: var(--primary); }
+        .tag-rent { background-color: var(--secondary); }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .btn-card-wa {
+            display: block;
+            text-align: center;
+            background-color: transparent;
+            color: #25D366;
+            border: 1px solid #25D366;
+            padding: 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-card-wa:hover {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* SERVICIOS Y PERFIL */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background-color: var(--bg-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Perfil */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .badge {
+            background-color: var(--bg-light);
+            color: var(--secondary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .profile-text h2 {
+            font-size: 2.2rem;
+            margin: 10px 0 5px;
+        }
+
+        .profile-text h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .profile-text p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: flex;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* CONTACTO Y FOOTER */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .info-item i {
+            color: var(--accent);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+        }
+
+        .contact-form input:focus, 
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Botón Flotante WA */
+        .float-wa {
+            position: fixed;
+            width: 55px;
+            height: 55px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .float-wa:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: absolute;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--bg-white);
+                width: 100%;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .btn-whatsapp-nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .profile-container, .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>Angélica Montiel</h1>
-    <p>Asesora Inmobiliaria</p>
-  </header>
+    <!-- 1. ENCABEZADO -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                Angélica Montiel <span>Inmobiliaria</span>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#inicio" class="nav-link">Inicio</a>
+                <a href="#propiedades" class="nav-link">Propiedades</a>
+                <a href="#servicios" class="nav-link">Servicios</a>
+                <a href="#nosotros" class="nav-link">Sobre Mí</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </nav>
+            <a href="https://wa.me/1234567890?text=Hola%20Ang%C3%A9lica,%20deseo%20m%C3%A1s%20informaci%C3%B3n" class="btn-whatsapp-nav" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp Directo
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-  <div class="container">
-    <h2>Propiedades Destacadas</h2>
-    <div id="propiedades-container" class="properties-grid">
-      <p>Cargando catálogo...</p>
-    </div>
-  </div>
+    <!-- 2. HERO SECTION CON BUSCADOR INTERACTIVO -->
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <h1>Encuentra la propiedad exclusiva que mereces</h1>
+            <p>Asesoría personalizada, transparencia y excelencia en cada transacción inmobiliaria.</p>
+            
+            <!-- Buscador Interactivo -->
+            <div class="search-box">
+                <div class="search-group">
+                    <label for="filter-tipo"><i class="fas fa-home"></i> Tipo</label>
+                    <select id="filter-tipo">
+                        <option value="todos">Todos los tipos</option>
+                        <option value="casa">Casa</option>
+                        <option value="apartamento">Apartamento</option>
+                        <option value="penthouse">Penthouse</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="filter-operacion"><i class="fas fa-key"></i> Operación</label>
+                    <select id="filter-operacion">
+                        <option value="todos">Todas</option>
+                        <option value="venta">Venta</option>
+                        <option value="alquiler">Alquiler</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="filter-habitaciones"><i class="fas fa-bed"></i> Habitaciones</label>
+                    <select id="filter-habitaciones">
+                        <option value="todos">Cualquiera</option>
+                        <option value="1">1 o más</option>
+                        <option value="2">2 o más</option>
+                        <option value="3">3 o más</option>
+                    </select>
+                </div>
+                <button class="btn-search" id="btn-buscar">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2026 Angélica Montiel - Todos los derechos reservados.</p>
-  </footer>
+    <!-- 3. CATÁLOGO DE PROPIEDADES -->
+    <section class="properties section-padding" id="propiedades">
+        <div class="container">
+            <div class="section-title">
+                <h2>Propiedades Destacadas</h2>
+                <p>Explora nuestra cartera de inmuebles seleccionados con los más altos estándares.</p>
+            </div>
+            <div class="properties-grid" id="properties-container">
+                <!-- Tarjeta 1 -->
+                <article class="property-card" data-tipo="casa" data-operacion="venta" data-habitaciones="3">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80" alt="Residencia de Lujo">
+                        <span class="tag tag-sale">Venta</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="price">$350,000 USD</span>
+                        <h3>Residencia Moderna Las Villas</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Urb. El Rosal, Sector Norte</p>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 3 Hab.</span>
+                            <span><i class="fas fa-bath"></i> 3 Baños</span>
+                            <span><i class="fas fa-ruler-combined"></i> 280 m²</span>
+                        </div>
+                        <a href="https://wa.me/1234567890?text=Hola%20Ang%C3%A9lica,%20me%20interesa%20la%20Residencia%20Moderna%20Las%20Villas" class="btn-card-wa" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </a>
+                    </div>
+                </article>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('propiedades-container');
-      setTimeout(() => {
-        container.innerHTML = '<p>Visita el panel de administración para publicar tus inmuebles.</p>';
-      }, 800);
-    });
-  </script>
+                <!-- Tarjeta 2 -->
+                <article class="property-card" data-tipo="apartamento" data-operacion="alquiler" data-habitaciones="2">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="Apartamento Ejecutivo">
+                        <span class="tag tag-rent">Alquiler</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="price">$1,200 USD / mes</span>
+                        <h3>Apartamento Ejecutivo Vistas al Parque</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Av. Empresarial 45</p>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 2 Hab.</span>
+                            <span><i class="fas fa-bath"></i> 2 Baños</span>
+                            <span><i class="fas fa-ruler-combined"></i> 110 m²</span>
+                        </div>
+                        <a href="https://wa.me/1234567890?text=Hola%20Ang%C3%A9lica,%20me%20interesa%20el%20Apartamento%20Ejecutivo" class="btn-card-wa" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </a>
+                    </div>
+                </article>
 
+                <!-- Tarjeta 3 -->
+                <article class="property-card" data-tipo="penthouse" data-operacion="venta" data-habitaciones="3">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Penthouse de Lujo">
+                        <span class="tag tag-sale">Venta</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="price">$580,000 USD</span>
+                        <h3>Penthouse Panorámico Exclusive</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Distrito Financiero</p>
+                        <div class="features">
+                            <span><i class="fas fa-bed"></i> 3 Hab.</span>
+                            <span><i class="fas fa-bath"></i> 4 Baños</span>
+                            <span><i class="fas fa-ruler-combined"></i> 420 m²</span>
+                        </div>
+                        <a href="https://wa.me/1234567890?text=Hola%20Ang%C3%A9lica,%20me%20interesa%20el%20Penthouse%20Panor%C3%A1mico" class="btn-card-wa" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Consultar
+                        </a>
+                    </div>
+                </article>
+            </div>
+            
+            <div id="no-results" class="no-results hidden">
+                <p>No se encontraron propiedades que coincidan con los criterios de búsqueda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICIOS PROFESIONALES -->
+    <section class="services section-padding bg-light" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Servicios Profesionales</h2>
+                <p>Soluciones integrales diseñadas para garantizar una experiencia ágil, segura y rentable.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Compra de Inmuebles</h3>
+                    <p>Búsqueda personalizada y negociación estratégica para encontrar la propiedad ideal acorde a tus metas y presupuesto.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-home"></i></div>
+                    <h3>Venta de Propiedades</h3>
+                    <p>Promoción multicanal con marketing de alto impacto para comercializar tu inmueble al mejor precio del mercado.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-key"></i></div>
+                    <h3>Gestión de Alquileres</h3>
+                    <p>Selección rigurosa de inquilinos y elaboración de contratos blindados para la protección de tu patrimonio.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-calculator"></i></div>
+                    <h3>Avalúos Inmobiliarios</h3>
+                    <p>Estudios de mercado precisos y dictámenes de valor real para tomar decisiones financieras acertadas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Asesoría Legal Inmobiliaria</h3>
+                    <p>Acompañamiento jurídico continuo durante todo el proceso de titulación, escrituración y firmas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PERFIL PROFESIONAL -->
+    <section class="profile section-padding" id="nosotros">
+        <div class="container profile-container">
+            <div class="profile-image">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Angélica Montiel">
+            </div>
+            <div class="profile-text">
+                <span class="badge">Sobre Mí</span>
+                <h2>Angélica Montiel</h2>
+                <h3>Asesora Inmobiliaria & Consultora de Inversiones</h3>
+                <p>Con más de 10 años de experiencia comprobada en el sector de bienes raíces, mi compromiso es guiar a mis clientes a través de un proceso seguro, transparente y altamente eficiente.</p>
+                <p>Entiendo que cada inmueble representa un proyecto de vida o un activo financiero determinante. Por ello, aplico un enfoque consultivo que prioriza la confianza, el rigor legal y la maximización del valor de tu inversión.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">+10</span>
+                        <span class="stat-label">Años de experiencia</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+250</span>
+                        <span class="stat-label">Propiedades vendidas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Clientes satisfechos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONTACTO -->
+    <section class="contact section-padding bg-light" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contacto Directo</h2>
+                <p>¿Tienes dudas o deseas agendar una consulta sobre un inmueble? Escríbeme directamente.</p>
+            </div>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Hablemos de tu próximo proyecto</h3>
+                    <p>Estoy disponible para orientarte en la compra, venta o avalúo de cualquier tipo de propiedad.</p>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+1 (234) 567-890</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contacto@angelicamontiel.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Oficina Corporativa, San Cristóbal</span>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Teléfono / WhatsApp" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="¿En qué puedo ayudarte? (Compra, venta, consulta...)" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/1234567890?text=Hola%20Ang%C3%A9lica,%20deseo%20asesor%C3%ADa%20personalizada" class="float-wa" target="_blank" aria-label="Contacto por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Angélica Montiel - Asesora Inmobiliaria. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript Integrada -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Menú Hamburguesa Móvil
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                });
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // 2. Lógica de Filtrado del Catálogo
+            const btnBuscar = document.getElementById('btn-buscar');
+            const selectTipo = document.getElementById('filter-tipo');
+            const selectOperacion = document.getElementById('filter-operacion');
+            const selectHabitaciones = document.getElementById('filter-habitaciones');
+            const propertyCards = document.querySelectorAll('.property-card');
+            const noResults = document.getElementById('no-results');
+
+            function filtrarPropiedades() {
+                const valTipo = selectTipo.value;
+                const valOperacion = selectOperacion.value;
+                const valHabitaciones = selectHabitaciones.value;
+                let visibleCount = 0;
+
+                propertyCards.forEach(card => {
+                    const cardTipo = card.getAttribute('data-tipo');
+                    const cardOperacion = card.getAttribute('data-operacion');
+                    const cardHabitaciones = parseInt(card.getAttribute('data-habitaciones'));
+
+                    const matchTipo = (valTipo === 'todos' || cardTipo === valTipo);
+                    const matchOperacion = (valOperacion === 'todos' || cardOperacion === valOperacion);
+                    const matchHabitaciones = (valHabitaciones === 'todos' || cardHabitaciones >= parseInt(valHabitaciones));
+
+                    if (matchTipo && matchOperacion && matchHabitaciones) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            }
+
+            if (btnBuscar) {
+                btnBuscar.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    filtrarPropiedades();
+                    document.getElementById('propiedades').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // 3. Envío de Formulario
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Gracias por su mensaje. Angélica Montiel se pondrá en contacto con usted a la brevedad.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
