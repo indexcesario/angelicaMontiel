@@ -3,614 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angélica Montiel | Asesora Inmobiliaria de Confianza</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <title>Angélica Montiel - Asesora Inmobiliaria</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            goldHover: '#B8962E',
+                            dark: '#0f172a',
+                            darkLight: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #1A365D;
-            --primary-hover: #0F2942;
-            --secondary: #C5A059;
-            --accent: #2B6CB0;
-            --text-dark: #2D3748;
-            --text-muted: #718096;
-            --bg-light: #F7FAFC;
-            --bg-white: #FFFFFF;
-            --border-color: #E2E8F0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --transition: all 0.3s ease;
-            --radius: 8px;
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f8fafc;
+            min-height: 100vh;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--bg-white); line-height: 1.6; }
-        
-        h1, h2, h3, .logo, .price { font-family: 'Playfair Display', Georgia, serif; }
-
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-        .section-padding { padding: 80px 0; }
-        .bg-light { background-color: var(--bg-light); }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.3rem; margin-bottom: 10px; color: var(--primary); font-weight: 700; }
-        .section-title p { color: var(--text-muted); font-size: 1.05rem; }
-
-        /* ENCABEZADO */
-        .header { background-color: var(--bg-white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .logo span { color: var(--secondary); font-size: 0.85rem; display: block; font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; }
-        .nav-menu { display: flex; gap: 25px; list-style: none; }
-        .nav-link { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: var(--transition); }
-        .nav-link:hover { color: var(--accent); }
-        .btn-whatsapp-nav { background-color: #25D366; color: white; padding: 10px 18px; border-radius: var(--radius); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: var(--transition); }
-        .btn-whatsapp-nav:hover { background-color: #1EBE5D; }
-        .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
-
-        /* HERO */
-        .hero { background: linear-gradient(rgba(26, 54, 93, 0.75), rgba(26, 54, 93, 0.75)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; padding: 120px 0 100px; color: white; text-align: center; }
-        .hero h1 { color: white; font-size: 3rem; margin-bottom: 15px; font-weight: 700; }
-        .hero p { font-size: 1.2rem; margin-bottom: 40px; color: #E2E8F0; font-family: 'Inter', sans-serif; }
-        .search-box { background: var(--bg-white); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; align-items: end; max-width: 950px; margin: 0 auto; }
-        .search-group { display: flex; flex-direction: column; text-align: left; }
-        .search-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; font-family: 'Inter', sans-serif; }
-        .search-group label i { color: var(--accent); margin-right: 4px; }
-        .search-group select { padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; outline: none; font-family: 'Inter', sans-serif; color: var(--text-dark); }
-        .btn-search { background-color: var(--primary); color: white; border: none; padding: 11px; border-radius: 4px; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; }
-        .btn-search:hover { background-color: var(--primary-hover); }
-
-        /* PROPIEDADES */
-        .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .property-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
-        .property-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .card-image { position: relative; height: 220px; background-color: #edf2f7; }
-        .card-image img { width: 100%; height: 100%; object-fit: cover; }
-        .tag { position: absolute; top: 15px; right: 15px; padding: 4px 12px; border-radius: 20px; color: white; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; font-family: 'Inter', sans-serif; }
-        .tag-sale { background-color: var(--primary); }
-        .tag-rent { background-color: var(--secondary); }
-        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .price { font-size: 1.4rem; font-weight: 700; color: var(--accent); display: block; margin-bottom: 5px; }
-        .card-body h3 { font-size: 1.2rem; margin-bottom: 8px; font-weight: 600; }
-        .location { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; font-family: 'Inter', sans-serif; }
-        .features { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; font-family: 'Inter', sans-serif; }
-        .btn-card-wa { display: block; text-align: center; background-color: transparent; color: #25D366; border: 1px solid #25D366; padding: 8px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: var(--transition); margin-top: auto; font-family: 'Inter', sans-serif; }
-        .btn-card-wa:hover { background-color: #25D366; color: white; }
-        .no-results { text-align: center; padding: 40px; color: var(--text-muted); font-size: 1.1rem; }
-        .hidden { display: none; }
-
-        /* SERVICIOS */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
-        .service-card { background: var(--bg-white); padding: 30px 20px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
-        .service-card:hover { transform: translateY(-3px); }
-        .icon-box { width: 60px; height: 60px; background-color: var(--bg-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 20px; }
-        .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; font-weight: 600; }
-        .service-card p { font-size: 0.9rem; color: var(--text-muted); font-family: 'Inter', sans-serif; }
-
-        /* PERFIL EQUILIBRADO */
-        .profile-container { 
-            display: grid; 
-            grid-template-columns: 320px 1fr; 
-            gap: 40px; 
-            align-items: center; 
+        /* Estilos Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        .profile-image { width: 100%; }
-        .profile-image img { 
-            width: 100%; 
-            height: 340px; 
-            object-fit: cover; 
-            border-radius: var(--radius); 
-            box-shadow: var(--shadow-lg); 
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
         }
-        .badge { background-color: var(--bg-light); color: var(--secondary); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; font-family: 'Inter', sans-serif; display: inline-block; }
-        .profile-text h2 { font-size: 2.2rem; margin: 8px 0 4px; font-weight: 700; }
-        .profile-text h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--accent); margin-bottom: 15px; font-weight: 500; }
-        .profile-text p { margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; font-family: 'Inter', sans-serif; }
-        .stats-grid { display: flex; gap: 25px; margin-top: 20px; }
-        .stat-number { display: block; font-size: 1.6rem; font-weight: 700; color: var(--primary); font-family: 'Playfair Display', Georgia, serif; }
-        .stat-label { font-size: 0.75rem; color: var(--text-muted); font-family: 'Inter', sans-serif; }
 
-        /* CONTACTO Y REDES SOCIALES */
-        .contact-box { background: var(--bg-white); padding: 50px; border-radius: var(--radius); box-shadow: var(--shadow-lg); text-align: center; max-width: 800px; margin: 0 auto; border-top: 5px solid #25D366; }
-        .contact-box h3 { font-size: 2rem; margin-bottom: 15px; font-weight: 700; }
-        .contact-box p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; font-family: 'Inter', sans-serif; }
-        .info-list { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 35px; }
-        .info-item-box { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; font-weight: 600; color: var(--primary); font-family: 'Inter', sans-serif; }
-        .info-item-box i { color: #25D366; font-size: 1.3rem; }
-        
-        .social-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
-        .social-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 30px; font-weight: 600; text-decoration: none; color: white; transition: var(--transition); font-size: 0.95rem; font-family: 'Inter', sans-serif; }
-        .social-btn.tiktok { background-color: #000000; }
-        .social-btn.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .social-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); opacity: 0.9; }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(212, 175, 55, 0.15);
+        }
 
-        .btn-whatsapp-large { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background-color: #25D366; color: white; padding: 16px 35px; border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: var(--transition); font-family: 'Inter', sans-serif; }
-        .btn-whatsapp-large:hover { background-color: #1EBE5D; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6); }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-        .float-wa { position: fixed; width: 55px; height: 55px; bottom: 30px; right: 30px; background-color: #25D366; color: white; border-radius: 50px; text-align: center; font-size: 28px; box-shadow: var(--shadow-lg); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition); }
-        .float-wa:hover { transform: scale(1.1); }
-        .footer { background-color: var(--primary); color: white; text-align: center; padding: 30px 0; font-size: 0.85rem; font-family: 'Inter', sans-serif; }
-        .footer-socials { display: flex; justify-content: center; gap: 20px; margin-top: 15px; }
-        .footer-socials a { color: white; font-size: 1.3rem; transition: var(--transition); }
-        .footer-socials a:hover { color: var(--secondary); }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(8px);
+        }
 
-        /* AJUSTES RESPONSIVOS EN MÓVIL */
-        @media (max-width: 768px) {
-            .section-padding { padding: 40px 0; }
-            .section-title { margin-bottom: 30px; }
-            .section-title h2 { font-size: 1.6rem; }
-            .section-title p { font-size: 0.9rem; }
-
-            .hamburger { display: block; }
-            .nav-menu { position: absolute; top: 80px; left: -100%; flex-direction: column; background-color: var(--bg-white); width: 100%; padding: 20px; box-shadow: var(--shadow); transition: var(--transition); }
-            .nav-menu.active { left: 0; }
-            .btn-whatsapp-nav { display: none; }
-            .hero h1 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; margin-bottom: 25px; }
-            
-            /* PERFIL MÓVIL EQUILIBRADO */
-            .profile-container { 
-                grid-template-columns: 120px 1fr; 
-                gap: 15px; 
-                align-items: center; 
-            }
-            .profile-image img { 
-                height: 140px; 
-                border-radius: var(--radius); 
-                object-fit: cover;
-            }
-            .profile-text h2 { font-size: 1.2rem; margin: 2px 0; }
-            .profile-text h3 { font-size: 0.8rem; margin-bottom: 8px; }
-            .profile-text p { font-size: 0.8rem; line-height: 1.3; margin-bottom: 6px; }
-            .stats-grid { gap: 12px; margin-top: 10px; }
-            .stat-number { font-size: 1.1rem; }
-            .stat-label { font-size: 0.65rem; }
-
-            .search-box { grid-template-columns: 1fr; }
-            .contact-box { padding: 25px 15px; }
-            .contact-box h3 { font-size: 1.5rem; }
-            .btn-whatsapp-large { width: 100%; font-size: 1rem; padding: 14px 20px; }
-
-            /* SERVICIOS EN 2 COLUMNAS COMPACTAS */
-            .services-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 12px; 
-            }
-            .service-card { 
-                padding: 15px 10px; 
-            }
-            .icon-box { 
-                width: 42px; 
-                height: 42px; 
-                font-size: 1.1rem; 
-                margin: 0 auto 10px; 
-            }
-            .service-card h3 { 
-                font-size: 0.9rem; 
-                margin-bottom: 6px; 
-            }
-            .service-card p { 
-                font-size: 0.78rem; 
-                line-height: 1.3; 
-            }
-
-            /* PROPIEDADES EN 2 COLUMNAS COMPACTAS EN CELULAR */
-            .properties-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .property-card {
-                font-size: 0.8rem;
-            }
-            .card-image {
-                height: 120px;
-            }
-            .tag {
-                top: 8px;
-                right: 8px;
-                padding: 2px 8px;
-                font-size: 0.6rem;
-            }
-            .card-body {
-                padding: 10px;
-            }
-            .price {
-                font-size: 1rem;
-                margin-bottom: 2px;
-            }
-            .card-body h3 {
-                font-size: 0.85rem;
-                margin-bottom: 4px;
-                line-height: 1.2;
-            }
-            .location {
-                font-size: 0.72rem;
-                margin-bottom: 8px;
-            }
-            .features {
-                padding: 6px 0;
-                font-size: 0.68rem;
-                margin-bottom: 8px;
-                gap: 4px;
-            }
-            .features span {
-                font-size: 0.65rem;
-            }
-            .btn-card-wa {
-                padding: 6px 4px;
-                font-size: 0.72rem;
-            }
+        .glass-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(255, 255, 255, 0.12);
         }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased">
 
-    <header class="header">
-        <div class="container nav-container">
-            <a href="#" class="logo">
-                Angélica Montiel <span>Inmobiliaria</span>
+    <!-- Navegación Glassmorphism -->
+    <nav class="sticky top-0 z-50 glass-nav px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-extrabold tracking-wider text-amber-400">
+                ANGÉLICA MONTIEL
             </a>
-            <nav class="nav-menu" id="nav-menu">
-                <a href="#inicio" class="nav-link">Inicio</a>
-                <a href="#propiedades" class="nav-link">Propiedades</a>
-                <a href="#servicios" class="nav-link">Servicios</a>
-                <a href="#nosotros" class="nav-link">Sobre Mí</a>
-                <a href="#contacto" class="nav-link">Contacto</a>
-            </nav>
-            <a href="https://wa.me/584147544303?text=Hola%20Ang%C3%A9lica,%20deseo%20m%C3%A1s%20informaci%C3%B3n" class="btn-whatsapp-nav" target="_blank">
-                <i class="fab fa-whatsapp"></i> WhatsApp Directo
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-gray-300">
+                <a href="#catalogo" class="hover:text-amber-400 transition-colors">Propiedades</a>
+                <a href="#nosotros" class="hover:text-amber-400 transition-colors">Sobre Mí</a>
+                <a href="#contacto" class="hover:text-amber-400 transition-colors">Contacto</a>
+            </div>
+            <a href="#contacto" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-lg">
+                <i class="fab font-bold fa-whatsapp mr-1"></i> Contactar
             </a>
-            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-                <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="relative py-20 px-6 text-center max-w-5xl mx-auto">
+        <div class="inline-block px-4 py-1.5 mb-6 rounded-full glass-panel border border-amber-400/30 text-amber-300 text-xs md:text-sm font-semibold tracking-wider uppercase">
+            Inmobiliaria Verax • San Cristóbal
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-100 via-amber-400 to-amber-200">
+            Encuentra la Propiedad de tus Sueños
+        </h1>
+        <p class="text-gray-300 text-base md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Asesoría profesional e integral para la compra, venta y alquiler de inmuebles exclusivos.
+        </p>
+
+        <!-- Barra de Búsqueda / Filtro Glass -->
+        <div class="glass-panel p-4 md:p-6 rounded-2xl max-w-3xl mx-auto flex flex-col md:flex-row gap-4">
+            <input type="text" id="searchInput" placeholder="Buscar por zona, título o tipo..." class="glass-input px-4 py-3 rounded-xl flex-1 text-sm placeholder-gray-400">
+            <button onclick="filterProperties()" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold px-6 py-3 rounded-xl text-sm transition-all">
+                <i class="fas fa-search mr-2"></i> Buscar
             </button>
         </div>
     </header>
 
-    <section class="hero" id="inicio">
-        <div class="container hero-content">
-            <h1>Encuentra la propiedad exclusiva que mereces</h1>
-            <p>Asesoría personalizada, transparencia y excelencia en cada transacción inmobiliaria.</p>
-            
-            <div class="search-box">
-                <div class="search-group">
-                    <label for="filter-tipo"><i class="fas fa-home"></i> Tipo</label>
-                    <select id="filter-tipo">
-                        <option value="todos">Todos los tipos</option>
-                        <option value="casa">Casa</option>
-                        <option value="apartamento">Apartamento</option>
-                        <option value="penthouse">Penthouse</option>
-                        <option value="terreno">Terreno</option>
-                        <option value="local">Local Comercial</option>
-                    </select>
-                </div>
-                <div class="search-group">
-                    <label for="filter-operacion"><i class="fas fa-key"></i> Operación</label>
-                    <select id="filter-operacion">
-                        <option value="todos">Todas</option>
-                        <option value="venta">Venta</option>
-                        <option value="alquiler">Alquiler</option>
-                    </select>
-                </div>
-                <div class="search-group">
-                    <label for="filter-habitaciones"><i class="fas fa-bed"></i> Habitaciones</label>
-                    <select id="filter-habitaciones">
-                        <option value="todos">Cualquiera</option>
-                        <option value="1">1 o más</option>
-                        <option value="2">2 o más</option>
-                        <option value="3">3 o más</option>
-                        <option value="4">4 o más</option>
-                    </select>
-                </div>
-                <button class="btn-search" id="btn-buscar">
-                    <i class="fas fa-search"></i> Buscar
-                </button>
+    <!-- Secciones del Catálogo -->
+    <main id="catalogo" class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Catálogo de Propiedades</h2>
+                <p class="text-gray-400 text-sm mt-1">Explora las opciones disponibles en el mercado</p>
             </div>
         </div>
-    </section>
 
-    <!-- PROPIEDADES -->
-    <section class="properties section-padding" id="propiedades">
-        <div class="container">
-            <div class="section-title">
-                <h2>Propiedades Destacadas</h2>
-                <p>Explora nuestra cartera de inmuebles seleccionados con los más altos estándares.</p>
-            </div>
-            
-            <div class="properties-grid" id="properties-container">
-                <!-- Se cargará automáticamente las propiedades -->
-            </div>
-            
-            <div id="no-results" class="no-results hidden">
-                <p>No hay propiedades disponibles por el momento o ninguna coincide con la búsqueda.</p>
+        <!-- Grid donde se insertan las tarjetas -->
+        <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full text-center py-16 glass-panel rounded-2xl">
+                <i class="fas fa-spinner fa-spin text-amber-400 text-3xl mb-4"></i>
+                <p class="text-gray-300 font-medium">Cargando catálogo de inmuebles...</p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- SERVICIOS -->
-    <section class="services section-padding bg-light" id="servicios">
-        <div class="container">
-            <div class="section-title">
-                <h2>Servicios Profesionales</h2>
-                <p>Soluciones integrales diseñadas para garantizar una experiencia ágil, segura y rentable.</p>
+    <!-- Sección Sobre Mí -->
+    <section id="nosotros" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="glass-panel rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+            <div class="w-full md:w-1/3 text-center">
+                <div class="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-amber-400/50 shadow-2xl glass-panel p-2">
+                    <img src="https://via.placeholder.com/300x300?text=Angelica+Montiel" alt="Angélica Montiel" class="w-full h-full object-cover rounded-full">
+                </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>Compra de Inmuebles</h3>
-                    <p>Búsqueda personalizada y negociación estratégica para encontrar la propiedad ideal acorde a tus metas y presupuesto.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-home"></i></div>
-                    <h3>Venta de Propiedades</h3>
-                    <p>Promoción multicanal con marketing de alto impacto para comercializar tu inmueble al mejor precio del mercado.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-key"></i></div>
-                    <h3>Gestión de Alquileres</h3>
-                    <p>Selección rigurosa de inquilinos y elaboración de contratos blindados para la protección de tu patrimonio.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-calculator"></i></div>
-                    <h3>Avalúos Inmobiliarios</h3>
-                    <p>Estudios de mercado precisos y dictámenes de valor real para tomar decisiones financieras acertadas.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-balance-scale"></i></div>
-                    <h3>Asesoría Legal Inmobiliaria</h3>
-                    <p>Acompañamiento jurídico continuo durante todo el proceso de titulación, escrituración y firmas.</p>
+            <div class="w-full md:w-2/3 text-left">
+                <h2 class="text-3xl font-bold text-white mb-4">Angélica Montiel</h2>
+                <p class="text-amber-400 text-sm font-semibold tracking-widest uppercase mb-4">Asesora Inmobiliaria Profesional</p>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Te acompaño en cada paso del proceso inmobiliario con ética, transparencia y dedicación. Mi compromiso es encontrar el lugar perfecto que se adapte a tus necesidades y estilo de vida.
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-sm text-gray-300">
+                    <div class="flex items-center gap-2"><i class="fas fa-check-circle text-amber-400"></i> Atención Personalizada</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check-circle text-amber-400"></i> Negociación Efectiva</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check-circle text-amber-400"></i> Asesoría Legal</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check-circle text-amber-400"></i> Amplio Portafolio</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PERFIL PROFESIONAL -->
-    <section class="profile section-padding" id="nosotros">
-        <div class="container profile-container">
-            <div class="profile-image">
-                <img id="perfil-foto" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Angélica Montiel">
-            </div>
-            <div class="profile-text">
-                <span class="badge">Sobre Mí</span>
-                <h2 id="perfil-nombre">Angélica Montiel</h2>
-                <h3 id="perfil-titulo">Asesora Inmobiliaria & Consultora de Inversiones</h3>
-                <div id="perfil-bio">
-                    <p>Cargando información...</p>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number">+10</span>
-                        <span class="stat-label">Años de experiencia</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">+250</span>
-                        <span class="stat-label">Propiedades vendidas</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Clientes satisfechos</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="max-w-4xl mx-auto px-6 py-16 text-center">
+        <div class="glass-panel p-8 md:p-12 rounded-3xl">
+            <h2 class="text-3xl font-bold text-white mb-4">¿Tienes dudas o deseas vender tu inmueble?</h2>
+            <p class="text-gray-300 mb-8">Escríbeme directamente a WhatsApp para brindarte atención inmediata.</p>
+            <a href="https://wa.me/584140000000?text=Hola%20Ang%C3%A9lica,%20deseo%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="inline-flex items-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-2xl text-lg transition-all shadow-xl hover:scale-105">
+                <i class="fab fa-whatsapp text-2xl"></i> Enviar Mensaje a WhatsApp
+            </a>
         </div>
     </section>
 
-    <!-- CONTACTO Y REDES SOCIALES -->
-    <section class="contact section-padding bg-light" id="contacto">
-        <div class="container">
-            <div class="section-title">
-                <h2>Atención Inmediata</h2>
-                <p>¿Tienes dudas o deseas agendar una consulta sobre una propiedad? Contáctame directamente.</p>
-            </div>
-            
-            <div class="contact-box">
-                <i class="fab fa-whatsapp" style="font-size: 3.5rem; color: #25D366; margin-bottom: 20px;"></i>
-                <h3>Hablemos de tu próximo inmueble</h3>
-                <p>Haz clic en el botón a continuación para iniciar una conversación privada por WhatsApp. Te responderé a la brevedad posible.</p>
-                
-                <div class="info-list">
-                    <div class="info-item-box">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>0414-7544303</span>
-                    </div>
-                    <div class="info-item-box">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>San Cristóbal, Estado Táchira</span>
-                    </div>
-                </div>
-
-                <a href="https://wa.me/584147544303?text=Hola%20Ang%C3%A9lica,%20deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20inmobiliarios" class="btn-whatsapp-large" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Enviar Mensaje por WhatsApp
-                </a>
-
-                <!-- REDES SOCIALES OFICIALES -->
-                <div class="social-buttons">
-                    <a href="https://www.tiktok.com/@angelicamontiel669" class="social-btn tiktok" target="_blank">
-                        <i class="fab fa-tiktok"></i> @angelicamontiel669
-                    </a>
-                    <a href="https://www.instagram.com/angelicamontiel.verax" class="social-btn instagram" target="_blank">
-                        <i class="fab fa-instagram"></i> @angelicamontiel.verax
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BOTÓN FLOTANTE INFERIOR DERECHO -->
-    <a href="https://wa.me/584147544303?text=Hola%20Ang%C3%A9lica,%20deseo%20asesor%C3%ADa%20personalizada" class="float-wa" target="_blank" aria-label="Contacto por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Angélica Montiel - Asesora Inmobiliaria. Todos los derechos reservados.</p>
-            <div class="footer-socials">
-                <a href="https://www.tiktok.com/@angelicamontiel669" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/angelicamontiel.verax" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="text-center py-8 text-sm text-gray-500 border-t border-gray-800/50">
+        <p>© 2026 Angélica Montiel - Asesora Inmobiliaria. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Lógica JavaScript robusta para leer archivos .json o .md -->
+    <!-- JavaScript para cargar desde _posts/propiedades -->
     <script>
         let allProperties = [];
 
-        function fixImagePath(path) {
-            if (!path) return 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80';
-            if (path.startsWith('http://') || path.startsWith('https://')) return path;
-            if (path.startsWith('/')) return path;
-            return '/' + path;
-        }
-
-        function parseMarkdownFrontmatter(markdownText) {
-            const data = {};
-            const match = markdownText.match(/^---\s*([\s\S]*?)\s*---/);
-            if (!match) return data;
+        async function fetchProperties() {
+            const grid = document.getElementById('property-grid');
             
-            const lines = match[1].split('\n');
-            lines.forEach(line => {
-                const parts = line.split(':');
-                if (parts.length >= 2) {
-                    const key = parts[0].trim();
-                    let value = parts.slice(1).join(':').trim();
-                    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-                        value = value.slice(1, -1);
-                    }
-                    data[key] = value;
+            try {
+                // RUTA CORREGIDA DIRECTA A _posts/propiedades
+                const apiUrl = 'https://api.github.com/repos/indexcesario/angelicaMontiel/contents/_posts/propiedades';
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error('No se pudo acceder a la carpeta de propiedades');
                 }
-            });
-            return data;
+                
+                const files = await response.json();
+                const propertyFiles = files.filter(file => file.name.endsWith('.md') || file.name.endsWith('.json'));
+
+                if (propertyFiles.length === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-12 glass-panel rounded-2xl">
+                            <p class="text-xl text-gray-300">No hay propiedades publicadas aún.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                allProperties = [];
+
+                for (const file of propertyFiles) {
+                    const fileRes = await fetch(file.download_url);
+                    const fileText = await fileRes.text();
+                    
+                    let prop = {
+                        title: "Propiedad sin título",
+                        price: "",
+                        location: "",
+                        image: "https://via.placeholder.com/600x400?text=Imagen+no+disponible",
+                        description: ""
+                    };
+
+                    if (file.name.endsWith('.json')) {
+                        try {
+                            const data = JSON.parse(fileText);
+                            prop.title = data.title || prop.title;
+                            prop.price = data.precio || data.price || "";
+                            prop.location = data.ubicacion || data.location || "";
+                            prop.image = data.imagen || data.image || prop.image;
+                            prop.description = data.descripcion || data.description || "";
+                        } catch (e) { console.error(e); }
+                    } else if (file.name.endsWith('.md')) {
+                        const frontMatterMatch = fileText.match(/^---([\s\S]*?)---/);
+                        if (frontMatterMatch) {
+                            const fmContent = frontMatterMatch[1];
+                            const getField = (key) => {
+                                const regex = new RegExp(`^\\s*${key}:\\s*["']?(.*?)["']?\\s*$`, 'm');
+                                const match = fmContent.match(regex);
+                                return match ? match[1].trim() : '';
+                            };
+
+                            prop.title = getField('title') || prop.title;
+                            prop.price = getField('precio') || getField('price') || prop.price;
+                            prop.location = getField('ubicacion') || getField('location') || prop.location;
+                            prop.image = getField('imagen') || getField('image') || prop.image;
+                            prop.description = getField('descripcion') || getField('description') || prop.description;
+                        }
+                    }
+
+                    allProperties.push(prop);
+                }
+
+                renderGrid(allProperties);
+
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 glass-panel rounded-2xl text-red-400">
+                        Ocurrió un error al cargar las propiedades. Revisa la carpeta en GitHub.
+                    </div>
+                `;
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Cargar datos de perfil
-            fetch('/content/perfil.json?v=' + new Date().getTime())
-                .then(res => res.json())
-                .then(data => {
-                    if (data.name) document.getElementById('perfil-nombre').textContent = data.name;
-                    if (data.title) document.getElementById('perfil-titulo').textContent = data.title;
-                    if (data.foto) document.getElementById('perfil-foto').src = fixImagePath(data.foto);
-                    if (data.bio) {
-                        document.getElementById('perfil-bio').innerHTML = `<p>${data.bio.replace(/\n/g, '</p><p>')}</p>`;
-                    }
-                })
-                .catch(err => console.log('Sin perfil personalizado aún'));
+        function renderGrid(properties) {
+            const grid = document.getElementById('property-grid');
+            grid.innerHTML = '';
 
-            // 2. Cargar Propiedades (soporta tanto .json como .md)
-            fetch('https://api.github.com/repos/indexcesario/angelicaMontiel/contents/content/propiedades')
-                .then(res => res.json())
-                .then(files => {
-                    if (!Array.isArray(files) || files.length === 0) {
-                        document.getElementById('no-results').classList.remove('hidden');
-                        return;
-                    }
-                    
-                    const fetchPromises = files.map(f => {
-                        if (f.name.endsWith('.json')) {
-                            return fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.json());
-                        } else if (f.name.endsWith('.md')) {
-                            return fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.text()).then(text => parseMarkdownFrontmatter(text));
-                        }
-                        return Promise.resolve(null);
-                    });
-
-                    Promise.all(fetchPromises)
-                        .then(properties => {
-                            allProperties = properties.filter(p => p && p.title);
-                            renderProperties(allProperties);
-                        })
-                        .catch(() => {
-                            document.getElementById('no-results').classList.remove('hidden');
-                        });
-                })
-                .catch(err => {
-                    document.getElementById('no-results').classList.remove('hidden');
-                });
-
-            // 3. Menú Hamburguesa
-            const hamburger = document.getElementById('hamburger');
-            const navMenu = document.getElementById('nav-menu');
-            if (hamburger && navMenu) {
-                hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', () => navMenu.classList.remove('active'));
-                });
-            }
-
-            // 4. Filtro de Búsqueda
-            document.getElementById('btn-buscar').addEventListener('click', applyFilters);
-        });
-
-        function renderProperties(list) {
-            const container = document.getElementById('properties-container');
-            const noResults = document.getElementById('no-results');
-            container.innerHTML = '';
-
-            if (list.length === 0) {
-                noResults.classList.remove('hidden');
+            if (properties.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center text-gray-400 py-8">No se encontraron coincidencias.</div>`;
                 return;
             }
 
-            noResults.classList.add('hidden');
+            properties.forEach(prop => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between';
 
-            list.forEach(item => {
-                const title = item.title || 'Propiedad sin título';
-                const price = item.price ? `$${Number(item.price).toLocaleString()}` : 'Consulte precio';
-                const location = item.location || 'San Cristóbal, Táchira';
-                const rooms = item.rooms || 0;
-                const baths = item.baths || 0;
-                const area = item.area ? `${item.area} m²` : 'N/A';
-                const type = (item.type || 'Venta').toLowerCase();
-                const image = fixImagePath(item.image);
-                
-                const waMessage = encodeURIComponent(`Hola Angélica, me interesa la propiedad: "${title}" (${price}) en ${location}.`);
-
-                const cardHtml = `
-                    <div class="property-card">
-                        <div class="card-image">
-                            <img src="${image}" alt="${title}">
-                            <span class="tag ${type.includes('alquiler') ? 'tag-rent' : 'tag-sale'}">${item.type || 'Venta'}</span>
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-gray-900">
+                            <img src="${prop.image}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.src='https://via.placeholder.com/600x400?text=Sin+Imagen'">
+                            ${prop.price ? `<span class="absolute top-4 right-4 bg-amber-400 text-gray-900 font-bold px-3 py-1 rounded-full text-sm shadow-lg">${prop.price}</span>` : ''}
                         </div>
-                        <div class="card-body">
-                            <div>
-                                <span class="price">${price}</span>
-                                <h3>${title}</h3>
-                                <p class="location"><i class="fas fa-map-marker-alt"></i> ${location}</p>
-                                <div class="features">
-                                    <span><i class="fas fa-bed"></i> ${rooms} Hab</span>
-                                    <span><i class="fas fa-bath"></i> ${baths} Baños</span>
-                                    <span><i class="fas fa-ruler-combined"></i> ${area}</span>
-                                </div>
-                            </div>
-                            <a href="https://wa.me/584147544303?text=${waMessage}" class="btn-card-wa" target="_blank">
-                                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
-                            </a>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${prop.title}</h3>
+                            ${prop.location ? `<p class="text-amber-300 text-sm mb-3"><i class="fas fa-map-marker-alt mr-1"></i> ${prop.location}</p>` : ''}
+                            ${prop.description ? `<p class="text-gray-300 text-sm line-clamp-3 mb-4">${prop.description}</p>` : ''}
                         </div>
                     </div>
+                    <div class="p-6 pt-0">
+                        <a href="https://wa.me/584140000000?text=Hola%20Ang%C3%A9lica,%20estoy%20interesado%20en:%20${encodeURIComponent(prop.title)}" target="_blank" class="block w-full py-3 px-4 bg-amber-400/10 hover:bg-amber-400 text-amber-300 hover:text-gray-900 font-semibold rounded-xl border border-amber-400/30 transition-all text-center">
+                            Consultar por WhatsApp
+                        </a>
+                    </div>
                 `;
-                container.innerHTML += cardHtml;
+
+                grid.appendChild(card);
             });
         }
 
-        function applyFilters() {
-            const tipo = document.getElementById('filter-tipo').value.toLowerCase();
-            const operacion = document.getElementById('filter-operacion').value.toLowerCase();
-            const habs = document.getElementById('filter-habitaciones').value;
-
-            const filtered = allProperties.filter(item => {
-                const matchTipo = (tipo === 'todos') || (item.property_type && item.property_type.toLowerCase() === tipo);
-                const matchOp = (operacion === 'todos') || (item.type && item.type.toLowerCase().includes(operacion));
-                const matchHabs = (habs === 'todos') || (item.rooms && Number(item.rooms) >= Number(habs));
-
-                return matchTipo && matchOp && matchHabs;
-            });
-
-            renderProperties(filtered);
+        function filterProperties() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allProperties.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.location.toLowerCase().includes(query) || 
+                p.description.toLowerCase().includes(query)
+            );
+            renderGrid(filtered);
         }
+
+        fetchProperties();
     </script>
 </body>
 </html>
