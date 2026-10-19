@@ -64,24 +64,24 @@
 
         /* PROPIEDADES */
         .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .property-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; transition: var(--transition); }
+        .property-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
         .property-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .card-image { position: relative; height: 220px; }
+        .card-image { position: relative; height: 220px; background-color: #edf2f7; }
         .card-image img { width: 100%; height: 100%; object-fit: cover; }
         .tag { position: absolute; top: 15px; right: 15px; padding: 4px 12px; border-radius: 20px; color: white; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         .tag-sale { background-color: var(--primary); }
         .tag-rent { background-color: var(--secondary); }
-        .card-body { padding: 20px; }
+        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .price { font-size: 1.3rem; font-weight: 700; color: var(--accent); display: block; margin-bottom: 5px; }
         .card-body h3 { font-size: 1.1rem; margin-bottom: 8px; font-family: 'Inter', sans-serif; }
         .location { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; }
         .features { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 15px; }
-        .btn-card-wa { display: block; text-align: center; background-color: transparent; color: #25D366; border: 1px solid #25D366; padding: 8px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: var(--transition); }
+        .btn-card-wa { display: block; text-align: center; background-color: transparent; color: #25D366; border: 1px solid #25D366; padding: 8px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: var(--transition); margin-top: auto; }
         .btn-card-wa:hover { background-color: #25D366; color: white; }
         .no-results { text-align: center; padding: 40px; color: var(--text-muted); font-size: 1.1rem; }
         .hidden { display: none; }
 
-        /* SERVICIOS Y PERFIL */
+        /* SERVICIOS */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
         .service-card { background: var(--bg-white); padding: 30px 20px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
         .service-card:hover { transform: translateY(-3px); }
@@ -89,15 +89,30 @@
         .service-card h3 { font-size: 1.1rem; margin-bottom: 10px; font-family: 'Inter', sans-serif; }
         .service-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-        .profile-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .profile-image img { width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+        /* PERFIL EQUILIBRADO (FOTO Y TEXTO LADO A LADO) */
+        .profile-container { 
+            display: grid; 
+            grid-template-columns: 320px 1fr; 
+            gap: 40px; 
+            align-items: center; 
+        }
+        .profile-image {
+            width: 100%;
+        }
+        .profile-image img { 
+            width: 100%; 
+            height: 340px; 
+            object-fit: cover; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow-lg); 
+        }
         .badge { background-color: var(--bg-light); color: var(--secondary); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
-        .profile-text h2 { font-size: 2.2rem; margin: 10px 0 5px; }
-        .profile-text h3 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--accent); margin-bottom: 20px; font-weight: 500; }
-        .profile-text p { margin-bottom: 15px; color: var(--text-muted); }
-        .stats-grid { display: flex; gap: 30px; margin-top: 25px; }
-        .stat-number { display: block; font-size: 1.8rem; font-weight: 700; color: var(--primary); }
-        .stat-label { font-size: 0.8rem; color: var(--text-muted); }
+        .profile-text h2 { font-size: 2rem; margin: 8px 0 4px; }
+        .profile-text h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--accent); margin-bottom: 15px; font-weight: 500; }
+        .profile-text p { margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; }
+        .stats-grid { display: flex; gap: 25px; margin-top: 20px; }
+        .stat-number { display: block; font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); }
 
         /* CONTACTO Y REDES SOCIALES */
         .contact-box { background: var(--bg-white); padding: 50px; border-radius: var(--radius); box-shadow: var(--shadow-lg); text-align: center; max-width: 800px; margin: 0 auto; border-top: 5px solid #25D366; }
@@ -123,16 +138,64 @@
         .footer-socials a { color: white; font-size: 1.3rem; transition: var(--transition); }
         .footer-socials a:hover { color: var(--secondary); }
 
+        /* AJUSTES RESPONSIVOS EN MÓVIL */
         @media (max-width: 768px) {
+            .section-padding { padding: 40px 0; }
+            .section-title { margin-bottom: 30px; }
+            .section-title h2 { font-size: 1.6rem; }
+            .section-title p { font-size: 0.9rem; }
+
             .hamburger { display: block; }
             .nav-menu { position: absolute; top: 80px; left: -100%; flex-direction: column; background-color: var(--bg-white); width: 100%; padding: 20px; box-shadow: var(--shadow); transition: var(--transition); }
             .nav-menu.active { left: 0; }
             .btn-whatsapp-nav { display: none; }
-            .hero h1 { font-size: 2rem; }
-            .profile-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; margin-bottom: 25px; }
+            
+            /* PERFIL MÓVIL: FOTO Y TEXTO AL LADO EN PANTALLAS PEQUEÑAS O COMPACTAS */
+            .profile-container { 
+                grid-template-columns: 130px 1fr; 
+                gap: 15px; 
+                align-items: center; 
+            }
+            .profile-image img { 
+                height: 150px; 
+                border-radius: 50%; /* Se ve un círculo elegante o cuadrado compacto */
+                object-fit: cover;
+            }
+            .profile-text h2 { font-size: 1.2rem; margin: 2px 0; }
+            .profile-text h3 { font-size: 0.8rem; margin-bottom: 8px; }
+            .profile-text p { font-size: 0.8rem; line-height: 1.3; margin-bottom: 6px; }
+            .stats-grid { gap: 15px; margin-top: 10px; }
+            .stat-number { font-size: 1.1rem; }
+            .stat-label { font-size: 0.65rem; }
+
             .search-box { grid-template-columns: 1fr; }
-            .contact-box { padding: 30px 20px; }
-            .btn-whatsapp-large { width: 100%; font-size: 1rem; }
+            .contact-box { padding: 25px 15px; }
+            .btn-whatsapp-large { width: 100%; font-size: 1rem; padding: 14px 20px; }
+
+            /* SERVICIOS EN 2 COLUMNAS COMPACTAS */
+            .services-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 12px; 
+            }
+            .service-card { 
+                padding: 15px 10px; 
+            }
+            .icon-box { 
+                width: 42px; 
+                height: 42px; 
+                font-size: 1.1rem; 
+                margin: 0 auto 10px; 
+            }
+            .service-card h3 { 
+                font-size: 0.9rem; 
+                margin-bottom: 6px; 
+            }
+            .service-card p { 
+                font-size: 0.78rem; 
+                line-height: 1.3; 
+            }
         }
     </style>
 </head>
@@ -172,6 +235,8 @@
                         <option value="casa">Casa</option>
                         <option value="apartamento">Apartamento</option>
                         <option value="penthouse">Penthouse</option>
+                        <option value="terreno">Terreno</option>
+                        <option value="local">Local Comercial</option>
                     </select>
                 </div>
                 <div class="search-group">
@@ -189,6 +254,7 @@
                         <option value="1">1 o más</option>
                         <option value="2">2 o más</option>
                         <option value="3">3 o más</option>
+                        <option value="4">4 o más</option>
                     </select>
                 </div>
                 <button class="btn-search" id="btn-buscar">
@@ -207,11 +273,11 @@
             </div>
             
             <div class="properties-grid" id="properties-container">
-                <!-- Se llenará automáticamente desde el panel de administración -->
+                <!-- Se cargará automáticamente las propiedades creadas desde Decap CMS -->
             </div>
             
             <div id="no-results" class="no-results hidden">
-                <p>No se encontraron propiedades que coincidan con los criterios de búsqueda.</p>
+                <p>No hay propiedades disponibles por el momento o ninguna coincide con la búsqueda.</p>
             </div>
         </div>
     </section>
@@ -253,11 +319,11 @@
         </div>
     </section>
 
-    <!-- PERFIL PROFESIONAL -->
+    <!-- PERFIL PROFESIONAL (FOTO Y TEXTO LADO A LADO) -->
     <section class="profile section-padding" id="nosotros">
         <div class="container profile-container">
             <div class="profile-image">
-                <img id="perfil-foto" src="" alt="Angélica Montiel">
+                <img id="perfil-foto" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Angélica Montiel">
             </div>
             <div class="profile-text">
                 <span class="badge">Sobre Mí</span>
@@ -341,30 +407,58 @@
         </div>
     </footer>
 
-    <!-- Script para Auto-Carga de Perfil -->
+    <!-- Lógica JavaScript para cargar Perfil y Catálogo Inmobiliario -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            function fixImagePath(path) {
-                if (!path) return '';
-                if (path.startsWith('http://') || path.startsWith('https://')) return path;
-                if (path.startsWith('/')) return path;
-                return '/' + path;
-            }
+        let allProperties = [];
 
+        function fixImagePath(path) {
+            if (!path) return 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80';
+            if (path.startsWith('http://') || path.startsWith('https://')) return path;
+            if (path.startsWith('/')) return path;
+            return '/' + path;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Cargar datos de perfil
             fetch('/content/perfil.json?v=' + new Date().getTime())
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
                     if (data.name) document.getElementById('perfil-nombre').textContent = data.name;
                     if (data.title) document.getElementById('perfil-titulo').textContent = data.title;
-                    if (data.foto) {
-                        document.getElementById('perfil-foto').src = fixImagePath(data.foto);
-                    }
+                    if (data.foto) document.getElementById('perfil-foto').src = fixImagePath(data.foto);
                     if (data.bio) {
                         document.getElementById('perfil-bio').innerHTML = `<p>${data.bio.replace(/\n/g, '</p><p>')}</p>`;
                     }
                 })
-                .catch(err => console.log('Cargando perfil...'));
+                .catch(err => console.log('Sin perfil personalizado aún'));
 
+            // 2. Cargar Propiedades desde GitHub
+            fetch('https://api.github.com/repos/indexcesario/angelicaMontiel/contents/content/propiedades')
+                .then(res => res.json())
+                .then(files => {
+                    if (!Array.isArray(files) || files.length === 0) {
+                        document.getElementById('no-results').classList.remove('hidden');
+                        return;
+                    }
+                    
+                    const fetchPromises = files
+                        .filter(f => f.name.endsWith('.json'))
+                        .map(f => fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.json()));
+
+                    Promise.all(fetchPromises)
+                        .then(properties => {
+                            allProperties = properties;
+                            renderProperties(allProperties);
+                        })
+                        .catch(() => {
+                            document.getElementById('no-results').classList.remove('hidden');
+                        });
+                })
+                .catch(err => {
+                    document.getElementById('no-results').classList.remove('hidden');
+                });
+
+            // 3. Menú Hamburguesa
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('nav-menu');
             if (hamburger && navMenu) {
@@ -373,7 +467,78 @@
                     link.addEventListener('click', () => navMenu.classList.remove('active'));
                 });
             }
+
+            // 4. Filtro de Búsqueda
+            document.getElementById('btn-buscar').addEventListener('click', applyFilters);
         });
+
+        function renderProperties(list) {
+            const container = document.getElementById('properties-container');
+            const noResults = document.getElementById('no-results');
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            list.forEach(item => {
+                const title = item.title || 'Propiedad sin título';
+                const price = item.price ? `$${Number(item.price).toLocaleString()}` : 'Consulte precio';
+                const location = item.location || 'San Cristóbal, Táchira';
+                const rooms = item.rooms || 0;
+                const baths = item.baths || 0;
+                const area = item.area ? `${item.area} m²` : 'N/A';
+                const type = (item.type || 'Venta').toLowerCase();
+                const image = fixImagePath(item.image);
+                
+                const waMessage = encodeURIComponent(`Hola Angélica, me interesa la propiedad: "${title}" (${price}) en ${location}.`);
+
+                const cardHtml = `
+                    <div class="property-card">
+                        <div class="card-image">
+                            <img src="${image}" alt="${title}">
+                            <span class="tag ${type.includes('alquiler') ? 'tag-rent' : 'tag-sale'}">${item.type || 'Venta'}</span>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <span class="price">${price}</span>
+                                <h3>${title}</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> ${location}</p>
+                                <div class="features">
+                                    <span><i class="fas fa-bed"></i> ${rooms} Hab</span>
+                                    <span><i class="fas fa-bath"></i> ${baths} Baños</span>
+                                    <span><i class="fas fa-ruler-combined"></i> ${area}</span>
+                                </div>
+                            </div>
+                            <a href="https://wa.me/584147544303?text=${waMessage}" class="btn-card-wa" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        function applyFilters() {
+            const tipo = document.getElementById('filter-tipo').value.toLowerCase();
+            .value.toLowerCase(); // Corregido el filtro general
+            const operacion = document.getElementById('filter-operacion').value.toLowerCase();
+            const habs = document.getElementById('filter-habitaciones').value;
+
+            const filtered = allProperties.filter(item => {
+                const matchTipo = (tipo === 'todos') || (item.property_type && item.property_type.toLowerCase() === tipo);
+                const matchOp = (operacion === 'todos') || (item.type && item.type.toLowerCase().includes(operacion));
+                const matchHabs = (habs === 'todos') || (item.rooms && Number(item.rooms) >= Number(habs));
+
+                return matchTipo && matchOp && matchHabs;
+            });
+
+            renderProperties(filtered);
+        }
     </script>
 </body>
 </html>
