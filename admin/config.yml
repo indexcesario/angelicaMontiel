@@ -1,0 +1,16 @@
+backend:
+  name: github
+  repo: indexcesario/angelicaMontiel
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "propiedades"
+    label: "Propiedades"
+    folder: "content/propiedades"
+    create: true
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Descripción", name: "body", widget: "markdown"}
