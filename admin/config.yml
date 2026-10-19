@@ -2,6 +2,8 @@ backend:
   name: github
   repo: indexcesario/angelicaMontiel
   branch: main
+  api_root: https://api.github.com
+  site_url: https://angelicamontiel.netlify.app
 
 media_folder: "images"
 public_folder: "/images"
