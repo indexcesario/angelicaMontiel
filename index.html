@@ -321,7 +321,7 @@
             </div>
             
             <div class="properties-grid" id="properties-container">
-                <!-- Se cargará automáticamente las propiedades desde GitHub -->
+                <!-- Se cargará automáticamente las propiedades -->
             </div>
             
             <div id="no-results" class="no-results hidden">
@@ -455,7 +455,7 @@
         </div>
     </footer>
 
-    <!-- Lógica JavaScript para leer archivos .md (Markdown) de Decap CMS -->
+    <!-- Lógica JavaScript robusta para leer archivos .json o .md -->
     <script>
         let allProperties = [];
 
@@ -500,7 +500,7 @@
                 })
                 .catch(err => console.log('Sin perfil personalizado aún'));
 
-            // 2. Cargar Propiedades (.md) desde GitHub
+            // 2. Cargar Propiedades (soporta tanto .json como .md)
             fetch('https://api.github.com/repos/indexcesario/angelicaMontiel/contents/content/propiedades')
                 .then(res => res.json())
                 .then(files => {
@@ -509,13 +509,18 @@
                         return;
                     }
                     
-                    const fetchPromises = files
-                        .filter(f => f.name.endsWith('.md'))
-                        .map(f => fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.text()).then(text => parseMarkdownFrontmatter(text)));
+                    const fetchPromises = files.map(f => {
+                        if (f.name.endsWith('.json')) {
+                            return fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.json());
+                        } else if (f.name.endsWith('.md')) {
+                            return fetch(f.download_url + '?v=' + new Date().getTime()).then(r => r.text()).then(text => parseMarkdownFrontmatter(text));
+                        }
+                        return Promise.resolve(null);
+                    });
 
                     Promise.all(fetchPromises)
                         .then(properties => {
-                            allProperties = properties.filter(p => p.title);
+                            allProperties = properties.filter(p => p && p.title);
                             renderProperties(allProperties);
                         })
                         .catch(() => {
