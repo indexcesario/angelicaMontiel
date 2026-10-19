@@ -8,8 +8,25 @@ public_folder: "/images"
 collections:
   - name: "propiedades"
     label: "Propiedades"
-    folder: "content/propiedades"
+    folder: "_posts/propiedades"
     create: true
     fields:
       - {label: "Título", name: "title", widget: "string"}
-      - {label: "Descripción", name: "body", widget: "markdown"}
+      - {label: "Precio", name: "price", widget: "string"}
+      - {label: "Tipo", name: "tipo", widget: "select", options: ["casa", "apartamento", "penthouse"]}
+      - {label: "Operación", name: "operacion", widget: "select", options: ["venta", "alquiler"]}
+      - {label: "Habitaciones", name: "habitaciones", widget: "number"}
+      - {label: "Ubicación", name: "location", widget: "string"}
+      - {label: "Foto principal", name: "image", widget: "image"}
+
+  - name: "perfil"
+    label: "Mi Perfil"
+    files:
+      - file: "content/perfil.json"
+        label: "Datos del Asesor"
+        name: "perfil"
+        fields:
+          - {label: "Nombre completo", name: "name", widget: "string"}
+          - {label: "Título profesional", name: "title", widget: "string"}
+          - {label: "Foto de perfil", name: "foto", widget: "image"}
+          - {label: "Biografía", name: "bio", widget: "text"}
