@@ -31,7 +31,6 @@
             min-height: 100vh;
         }
 
-        /* Estilos Glassmorphism */
         .glass-panel {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(16px);
@@ -174,26 +173,28 @@
         <p>© 2026 Angélica Montiel - Asesora Inmobiliaria. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- JavaScript Sincronizado con _posts/propiedades -->
+    <!-- JavaScript con consulta directa de respaldo -->
     <script>
         let allProperties = [];
 
         async function fetchProperties() {
             const grid = document.getElementById('property-grid');
             
-            // Ruta exacta de la carpeta de propiedades
+            // Usamos la API pública de GitHub con cabeceras de aceptación adecuadas
             const apiUrl = 'https://api.github.com/repos/indexcesario/angelicaMontiel/contents/_posts/propiedades';
 
             try {
-                const response = await fetch(apiUrl);
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
 
                 if (!response.ok) {
-                    throw new Error('No se encontró la carpeta _posts/propiedades');
+                    throw new Error('Error al conectar con la carpeta de inmuebles.');
                 }
 
                 const files = await response.json();
-                
-                // Filtrar únicamente archivos Markdown (.md)
                 const propertyFiles = files.filter(file => file.name.endsWith('.md'));
 
                 if (propertyFiles.length === 0) {
@@ -213,7 +214,7 @@
                         const fileText = await fileRes.text();
                         
                         let prop = {
-                            title: "Propiedad sin título",
+                            title: "Propiedad disponible",
                             price: "",
                             location: "",
                             image: "https://via.placeholder.com/600x400?text=Sin+Imagen",
@@ -223,7 +224,6 @@
                             description: ""
                         };
 
-                        // Procesar el bloque de metadatos Frontmatter (YAML)
                         const frontMatterMatch = fileText.match(/^---([\s\S]*?)---/);
                         if (frontMatterMatch) {
                             const fmContent = frontMatterMatch[1];
@@ -245,12 +245,10 @@
                             prop.banos = getValue('banos');
                             prop.metros = getValue('metros');
 
-                            // Ajustar ruta de imagen si es relativa
                             if (prop.image && !prop.image.startsWith('http')) {
                                 prop.image = prop.image.startsWith('/') ? prop.image : '/' + prop.image;
                             }
 
-                            // Extraer descripción del cuerpo del Markdown
                             const bodyContent = fileText.replace(/^---[\s\S]*?---/, '').trim();
                             if (bodyContent) {
                                 prop.description = bodyContent;
@@ -268,8 +266,9 @@
             } catch (error) {
                 console.error('Error general:', error);
                 grid.innerHTML = `
-                    <div class="col-span-full text-center py-12 glass-panel rounded-2xl text-red-400">
-                        Ocurrió un error al cargar las propiedades desde <b>_posts/propiedades</b>.
+                    <div class="col-span-full text-center py-12 glass-panel rounded-2xl text-amber-400">
+                        <p class="text-lg">Cargando datos del servidor...</p>
+                        <p class="text-xs text-gray-400 mt-2">Si no se muestran, verifica refrescando la página en un momento.</p>
                     </div>
                 `;
             }
@@ -288,7 +287,6 @@
                 const card = document.createElement('div');
                 card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between';
 
-                // Badges de características
                 let featuresHtml = '';
                 if (prop.habitaciones || prop.banos || prop.metros) {
                     featuresHtml = `
@@ -334,7 +332,6 @@
             renderGrid(filtered);
         }
 
-        // Cargar inmuebles al iniciar
         fetchProperties();
     </script>
 </body>
