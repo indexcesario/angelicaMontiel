@@ -77,7 +77,7 @@
 </head>
 <body class="font-sans antialiased">
 
-    <!-- Navegación Glassmorphism -->
+    <!-- Navegación -->
     <nav class="sticky top-0 z-50 glass-nav px-6 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="#" class="text-xl md:text-2xl font-extrabold tracking-wider text-amber-400">
@@ -106,7 +106,7 @@
             Asesoría profesional e integral para la compra, venta y alquiler de inmuebles exclusivos.
         </p>
 
-        <!-- Barra de Búsqueda / Filtro Glass -->
+        <!-- Barra de Búsqueda -->
         <div class="glass-panel p-4 md:p-6 rounded-2xl max-w-3xl mx-auto flex flex-col md:flex-row gap-4">
             <input type="text" id="searchInput" oninput="filterProperties()" placeholder="Buscar por zona, título o tipo..." class="glass-input px-4 py-3 rounded-xl flex-1 text-sm placeholder-gray-400">
             <button onclick="filterProperties()" class="bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold px-6 py-3 rounded-xl text-sm transition-all">
@@ -115,7 +115,7 @@
         </div>
     </header>
 
-    <!-- Secciones del Catálogo -->
+    <!-- Catálogo de Propiedades -->
     <main id="catalogo" class="max-w-7xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row justify-between items-center mb-10">
             <div>
@@ -124,7 +124,6 @@
             </div>
         </div>
 
-        <!-- Grid donde se insertan las tarjetas -->
         <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="col-span-full text-center py-16 glass-panel rounded-2xl">
                 <i class="fas fa-spinner fa-spin text-amber-400 text-3xl mb-4"></i>
@@ -168,122 +167,111 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="text-center py-8 text-sm text-gray-500 border-t border-gray-800/50">
+    <!-- Footer con Botón Secreto (Candado) -->
+    <footer class="text-center py-8 text-sm text-gray-500 border-t border-gray-800/50 flex flex-col items-center gap-2">
         <p>© 2026 Angélica Montiel - Asesora Inmobiliaria. Todos los derechos reservados.</p>
+        <button onclick="solicitarAccesoAdmin()" class="text-gray-600 hover:text-amber-400 transition-colors text-xs flex items-center gap-1 mt-1" title="Panel de Administración">
+            <i class="fas fa-lock"><span>Panel Admin</span></i>
+        </button>
     </footer>
 
-    <!-- JavaScript con consulta directa de respaldo -->
-    <script>
-        let allProperties = [];
+    <!-- MODAL / PANEL DE ADMINISTRACIÓN OCULTO -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-amber-400/40">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-amber-400"><i class="fas fa-cogs mr-2"></i> Panel de Administración Inmobiliaria</h3>
+                <button onclick="cerrarAdmin()" class="text-gray-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            </div>
 
-        async function fetchProperties() {
-            const grid = document.getElementById('property-grid');
-            
-            // Usamos la API pública de GitHub con cabeceras de aceptación adecuadas
-            const apiUrl = 'https://api.github.com/repos/indexcesario/angelicaMontiel/contents/_posts/propiedades';
+            <!-- Formulario de Nueva Propiedad -->
+            <form id="propertyForm" onsubmit="guardarPropiedad(event)" class="space-y-4">
+                <h4 class="text-lg font-semibold text-white border-b border-gray-700 pb-2">Agregar Nuevo Inmueble</h4>
+                
+                <div>
+                    <label class="block text-xs text-gray-300 mb-1">Título del Inmueble</label>
+                    <input type="text" id="pTitle" required placeholder="Ej: Hermosa Casa en Barrio Obrero" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
+                </div>
 
-            try {
-                const response = await fetch(apiUrl, {
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Error al conectar con la carpeta de inmuebles.');
-                }
-
-                const files = await response.json();
-                const propertyFiles = files.filter(file => file.name.endsWith('.md'));
-
-                if (propertyFiles.length === 0) {
-                    grid.innerHTML = `
-                        <div class="col-span-full text-center py-12 glass-panel rounded-2xl">
-                            <p class="text-xl text-gray-300">No hay propiedades publicadas en este momento.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                allProperties = [];
-
-                for (const file of propertyFiles) {
-                    try {
-                        const fileRes = await fetch(file.download_url);
-                        const fileText = await fileRes.text();
-                        
-                        let prop = {
-                            title: "Propiedad disponible",
-                            price: "",
-                            location: "",
-                            image: "https://via.placeholder.com/600x400?text=Sin+Imagen",
-                            habitaciones: "",
-                            banos: "",
-                            metros: "",
-                            description: ""
-                        };
-
-                        const frontMatterMatch = fileText.match(/^---([\s\S]*?)---/);
-                        if (frontMatterMatch) {
-                            const fmContent = frontMatterMatch[1];
-                            
-                            const getValue = (key) => {
-                                const regex = new RegExp(`^\\s*${key}:\\s*(.*)$`, 'm');
-                                const match = fmContent.match(regex);
-                                if (match) {
-                                    return match[1].replace(/^["']|["']$/g, '').trim();
-                                }
-                                return '';
-                            };
-
-                            prop.title = getValue('title') || prop.title;
-                            prop.price = getValue('precio') || prop.price;
-                            prop.location = getValue('ubicacion') || prop.location;
-                            prop.image = getValue('imagen') || prop.image;
-                            prop.habitaciones = getValue('habitaciones');
-                            prop.banos = getValue('banos');
-                            prop.metros = getValue('metros');
-
-                            if (prop.image && !prop.image.startsWith('http')) {
-                                prop.image = prop.image.startsWith('/') ? prop.image : '/' + prop.image;
-                            }
-
-                            const bodyContent = fileText.replace(/^---[\s\S]*?---/, '').trim();
-                            if (bodyContent) {
-                                prop.description = bodyContent;
-                            }
-                        }
-
-                        allProperties.push(prop);
-                    } catch (e) {
-                        console.error('Error procesando el archivo:', file.name, e);
-                    }
-                }
-
-                renderGrid(allProperties);
-
-            } catch (error) {
-                console.error('Error general:', error);
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-12 glass-panel rounded-2xl text-amber-400">
-                        <p class="text-lg">Cargando datos del servidor...</p>
-                        <p class="text-xs text-gray-400 mt-2">Si no se muestran, verifica refrescando la página en un momento.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">Precio / Canon</label>
+                        <input type="text" id="pPrice" required placeholder="Ej: $45.000 o $300/mes" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
                     </div>
-                `;
-            }
-        }
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">Ubicación / Sector</label>
+                        <input type="text" id="pLocation" required placeholder="Ej: San Cristóbal, Táchira" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
+                    </div>
+                </div>
 
-        function renderGrid(properties) {
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">Habitaciones</label>
+                        <input type="number" id="pHabs" placeholder="Ej: 3" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">Baños</label>
+                        <input type="number" id="pBanos" placeholder="Ej: 2" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-300 mb-1">Metros (m²)</label>
+                        <input type="number" id="pMetros" placeholder="Ej: 120" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-gray-300 mb-1">Foto Principal (Selecciona de tu galería o archivo)</label>
+                    <input type="file" id="pImageFile" accept="image/*" class="glass-input w-full px-4 py-2 rounded-xl text-sm file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-400 file:text-gray-900 hover:file:bg-amber-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs text-gray-300 mb-1">Descripción Detallada</label>
+                    <textarea id="pDesc" rows="3" placeholder="Detalles de la propiedad, acabados, comodidades..." class="glass-input w-full px-4 py-2.5 rounded-xl text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-3 rounded-xl text-sm transition-all shadow-lg">
+                    <i class="fas fa-plus-circle mr-2"></i> Publicar Inmueble en la Web
+                </button>
+            </form>
+
+            <!-- Lista para administrar / borrar propiedades existentes -->
+            <div class="mt-8 pt-6 border-t border-gray-700">
+                <h4 class="text-lg font-semibold text-white mb-4">Inmuebles Publicados (Gestionar)</h4>
+                <div id="adminPropertyList" class="space-y-3 max-h-48 overflow-y-auto pr-2">
+                    <!-- Se cargan dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Gestión Local Instantánea -->
+    <script>
+        // Propiedades por defecto iniciales (puedes agregar o borrar las que quieras)
+        const defaultProperties = [
+            {
+                id: 1,
+                title: "Moderna Casa Residencial",
+                price: "$65.000",
+                location: "Pirineos, San Cristóbal",
+                habitaciones: "3",
+                banos: "2",
+                metros: "150",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+                description: "Hermosa casa totalmente remodelada con acabados de primera, cocina moderna y amplio estacionamiento."
+            }
+        ];
+
+        let properties = JSON.parse(localStorage.getItem('angelica_propiedades')) || defaultProperties;
+
+        function renderGrid(list = properties) {
             const grid = document.getElementById('property-grid');
             grid.innerHTML = '';
 
-            if (properties.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center text-gray-400 py-8">No se encontraron inmuebles con ese criterio.</div>`;
+            if (list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 glass-panel rounded-2xl text-gray-400">No hay propiedades publicadas en este momento.</div>`;
                 return;
             }
 
-            properties.forEach(prop => {
+            list.forEach(prop => {
                 const card = document.createElement('div');
                 card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between';
 
@@ -317,14 +305,108 @@
                         </a>
                     </div>
                 `;
-
                 grid.appendChild(card);
             });
         }
 
+        // Sistema de contraseña y acceso
+        function solicitarAccesoAdmin() {
+            const clave = prompt("Ingresa la contraseña del panel de administración:");
+            if (clave === "angelica2026") {
+                document.getElementById('adminModal').classList.remove('hidden');
+                renderAdminList();
+            } else if (clave !== null) {
+                alert("Contraseña incorrecta.");
+            }
+        }
+
+        function cerrarAdmin() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        // Guardar propiedad con imagen de la galería
+        function guardarPropiedad(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('pTitle').value;
+            const price = document.getElementById('pPrice').value;
+            const location = document.getElementById('pLocation').value;
+            const habitaciones = document.getElementById('pHabs').value;
+            const banos = document.getElementById('pBanos').value;
+            const metros = document.getElementById('pMetros').value;
+            const description = document.getElementById('pDesc').value;
+            const imageFile = document.getElementById('pImageFile').files[0];
+
+            const nuevaProp = {
+                id: Date.now(),
+                title,
+                price,
+                location,
+                habitaciones,
+                banos,
+                metros,
+                description,
+                image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80" // Imagen por defecto
+            };
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    nuevaProp.image = e.target.result;
+                    properties.unshift(nuevaProp);
+                    localStorage.setItem('angelica_propiedades', JSON.stringify(properties));
+                    renderGrid();
+                    renderAdminList();
+                    document.getElementById('propertyForm').reset();
+                    alert("¡Inmueble publicado con éxito en tiempo real!");
+                    cerrarAdmin();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                properties.unshift(nuevaProp);
+                localStorage.setItem('angelica_propiedades', JSON.stringify(properties));
+                renderGrid();
+                renderAdminList();
+                document.getElementById('propertyForm').reset();
+                alert("¡Inmueble publicado con éxito en tiempo real!");
+                cerrarAdmin();
+            }
+        }
+
+        function renderAdminList() {
+            const adminList = document.getElementById('adminPropertyList');
+            adminList.innerHTML = '';
+
+            if (properties.length === 0) {
+                adminList.innerHTML = `<p class="text-xs text-gray-400">No hay inmuebles registrados.</p>`;
+                return;
+            }
+
+            properties.forEach(prop => {
+                const item = document.createElement('div');
+                item.className = 'flex justify-between items-center bg-white/5 p-3 rounded-xl text-sm';
+                item.innerHTML = `
+                    <span class="truncate max-w-[250px] text-gray-200 font-medium">${prop.title}</span>
+                    <button onclick="eliminarPropiedad(${prop.id})" class="text-red-400 hover:text-red-300 text-xs px-3 py-1 bg-red-500/10 rounded-lg border border-red-500/20">
+                        Eliminar
+                    </button>
+                `;
+                adminList.appendChild(item);
+            });
+        }
+
+        function eliminarPropiedad(id) {
+            if (confirm("¿Seguro que deseas eliminar este inmueble?")) {
+                properties = properties.filter(p => p.id !== id);
+                localStorage.setItem('angelica_propiedades', JSON.stringify(properties));
+                renderGrid();
+                renderAdminList();
+            }
+        }
+
         function filterProperties() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allProperties.filter(p => 
+            const filtered = properties.filter(p => 
                 p.title.toLowerCase().includes(query) || 
                 p.location.toLowerCase().includes(query) || 
                 p.description.toLowerCase().includes(query)
@@ -332,7 +414,9 @@
             renderGrid(filtered);
         }
 
-        fetchProperties();
+        // Cargar catálogo al abrir
+        renderGrid();
     </script>
 </body>
+</html>
 </html>
